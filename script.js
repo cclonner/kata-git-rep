@@ -63,14 +63,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const debouncedUpdateAutocomplete = debounce(updateAutocompleteList, 400);
-
-    searchInput.addEventListener("input", function () {
-        const keyword = searchInput.value.trim();
-        if (keyword !== "" && !keyword.match(/^+/)) {
-            debouncedUpdateAutocomplete(keyword);
-        } else {
-            autocompleteList.innerHTML = "";
-            autocompleteList.classList.remove("active");
-        }
+    searchInput.addEventListener("input", function () {  
+        const keyword = searchInput.value.trim();  
+        if (keyword) { // Проверяем, что строка не является пустой после удаления пробелов
+            debouncedUpdateAutocomplete(keyword);  
+        } else {  
+            autocompleteList.innerHTML = "";  
+            autocompleteList.classList.remove("active");  
+        }  
     });
 });
