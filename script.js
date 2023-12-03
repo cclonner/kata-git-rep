@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     searchInput.addEventListener("input", function () {
         const keyword = searchInput.value.trim();
-        if (keyword !== "" && keyword !== " ") {
+        if (keyword !== "" && !keyword.match(/^+/)) {
             debouncedUpdateAutocomplete(keyword);
         } else {
             autocompleteList.innerHTML = "";
