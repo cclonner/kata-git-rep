@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
 
     function updateAutocompleteList(keyword) {
+        console.log(keyword)
         fetch(`https://api.github.com/search/repositories?q=${keyword}&per_page=15`)
             .then(response => response.json())
             .then(data => {
@@ -59,13 +60,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
                 autocompleteList.classList.add("active");
             })
-            .catch(error => console.error("Error fetching data:", error));
+            .catch(error => console.error(error));
     }
 
     const debouncedUpdateAutocomplete = debounce(updateAutocompleteList, 400);
     searchInput.addEventListener("input", function () {  
         const keyword = searchInput.value.trim();  
-        if (keyword) { // Проверяем, что строка не является пустой после удаления пробелов
+        if (keyword) { 
             debouncedUpdateAutocomplete(keyword);  
         } else {  
             autocompleteList.innerHTML = "";  
